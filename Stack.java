@@ -3,7 +3,7 @@ package eg.edu.alexu.csd.datastructure.mailServer;
 import java.util.EmptyStackException;
 
 public class Stack implements IStack {
-    private class Node{
+    private static class Node{
         Object data;
         Node next;
 
