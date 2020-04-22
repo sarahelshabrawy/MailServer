@@ -238,5 +238,47 @@ public class Operations_Folder {
 		}
 		return null;
 	}
+	public String[] file_to_1D_array(String file_path) {
+		try {
+			LinkedList list = new LinkedList();
+			BufferedReader Reader = new BufferedReader(new FileReader(file_path));
+			String line = Reader.readLine();
+			String str = null;
+			int i = 0;
+			while (line != null) {
+				list.add(line.split("\\s+"));
+				line = Reader.readLine();
+				i++;
+			}
+
+			Reader.close();
+			i--;
+//			list.remove(i);
+			Object[] objectArray = list.listto1Darray(list);
+			String[] stringArray = new String[objectArray.length]; 
+			for(int p =0 ; p<objectArray.length;p++){
+				stringArray[p]=Arrays.toString((String[])objectArray[p]).replace("[","" ).replace("]", "");
+				
+			}
+			return stringArray ;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+	public void WriteListInFile(File file, String[] array) {
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(file.getPath(), true))) {
+			int size = array.length;
+//			list.toString();
+			for (int i = 0; i < size; i++) {
+				bw.write(array[i] + "\n");
+			}
+		} catch (IOException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
+	}
 
 }
